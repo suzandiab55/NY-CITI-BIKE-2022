@@ -1,4 +1,4 @@
-plotly
+plotly == 5.22.0
 streamlit
 matplotlib
 streamlit_keplergl
