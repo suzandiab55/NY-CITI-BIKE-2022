@@ -4,6 +4,7 @@ import pandas as pd
 import numpy as np
 from plotly.subplots import make_subplots
 import plotly.graph_objects as go
+import plotly.express as px
 import matplotlib.pyplot as plt
 from streamlit_keplergl import keplergl_static 
 from keplergl import KeplerGl
@@ -19,7 +20,7 @@ st.title("Citi Bike Strategy Dashboard")
 st.sidebar.title("Aspect Selector")
 page = st.sidebar.selectbox('Select an aspect of the analysis',
   ["Introduction","Weather Component and Bike Usage",
-   "Most Popular Bike Stations",
+   "Most Popular Bike Stations", "Bike Rides Throughout the Week", 
     "Interactive Map with Aggregated Bike Trips", "Recommendations"])
 
 ####################### Import data #########################################
@@ -165,6 +166,64 @@ elif page == 'Most Popular Bike Stations':
     st.plotly_chart(fig, use_container_width = True)
     st.markdown("The bar chart clearly shows that certain start stations are more popular than others. The top four stations are West 21st Street/6th Avenue, West Street/Chambers Street, Broadway/West 58th Street, and 6th Avenue/West 33rd Street. These findings indicate that Citi Bike stations in Midtown Manhattan and near Central Park experience the highest usage. Further exploration of this trend can be conducted using the interactive map available through the sidebar select box.")
 
+################# BIKE RIDES THROUGHOUT WEEK PAGE #################
+
+elif page == 'Bike Rides Throughout the Week':
+    
+############ create heatmap ##########
+    
+    day_order = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"]
+    df['day_of_week'] = pd.Categorical(df['day_of_week'], categories=day_order, ordered=True)
+    
+    ride_counts = df.groupby(['day_of_week', 'hour']).size().reset_index(name='ride_count')
+    
+    pivot_table = ride_counts.pivot(index='day_of_week', columns='hour', values='ride_count').fillna(0)
+    
+    hour_labels = {
+    0: '12 AM', 1: '1 AM', 2: '2 AM', 3: '3 AM', 4: '4 AM', 5: '5 AM', 6: '6 AM', 7: '7 AM',
+    8: '8 AM', 9: '9 AM', 10: '10 AM', 11: '11 AM', 12: '12 PM', 13: '1 PM', 14: '2 PM', 
+    15: '3 PM', 16: '4 PM', 17: '5 PM', 18: '6 PM', 19: '7 PM', 20: '8 PM', 21: '9 PM', 
+    22: '10 PM', 23: '11 PM'
+    }
+    
+    labels = [hour_labels[i] for i in range(24)]
+    
+    fig = px.imshow(
+    pivot_table,
+    labels=dict(x="Hour of the Day", y="Day of the Week", color="Number of Rides"),
+    x=labels,
+    y=pivot_table.index,
+    color_continuous_scale='Blues'
+    )
+    
+    fig.update_layout(
+    title=dict(
+            text = 'Bike Rides Throughout the Week',
+            font=dict(
+            size=22
+        )
+    ),
+        xaxis=dict(
+        title=dict(
+            text='Hour of the Day',
+            font=dict(
+                size=20
+            )
+        )
+    ),
+    yaxis=dict(
+        title=dict(
+            text='Day of the Week',
+            font=dict(
+                size=20
+            )
+        )
+    ),
+    xaxis_nticks=12,
+    )
+    st.plotly_chart(fig, use_container_width = True)
+    st.markdown("Looking at the heatmap, Wednesdays, Thursdays, and Fridays emerge as the busiest days of the week, with a notable surge in rider activity around 4-6 pm. This insight is crucial for optimizing station management, allowing us to allocate resources efficiently during peak hours to ensure smooth operations and customer satisfaction. ")
+
 ################# AGGREGATED BIKE TRIPS PAGE #################
 
 elif page == 'Interactive Map with Aggregated Bike Trips': 
@@ -199,5 +258,5 @@ else:
     st.markdown ("Source: https://www.competitionsciences.org/2020/10/29/statistics-education-resources-for-teachers-and-students-from-the-asa/")
     st.markdown("### The analysis has shown that Citi Bike should focus on the following objectives moving forward:")
     st.markdown("- Add more stations or increase the size of existing stations in high-demand areas to accomodate bike shortages, such as the Hudson River Greenway, Chelsea, and the Meatpacking District.")
-    st.markdown("- Offer incentives, such as a $2 ride credit for users who return bikes to less busy stations or ride during off-peak hours.")
-    st.markdown("- Ensure bikes are fully stocked in these areas during the warmer months to meet higher demand, while reducing the supply in winter and late autumn to lower logistics costs.")
+    st.markdown("- Offer incentives, such as a $2 ride credit for users who return bikes to less busy stations or ride during off-peak hours, particularly on Wednesdays, Thursdays, and Fridays around 4-6 pm.")
+    st.markdown("- Based on the weekly demand forecast, we can ensure the stations in high-demand areas are adequately stocked with bikes during the warmer months, while simultaneously reducing the supply in winter and late autumn to lower logistics costs.")
