@@ -41,10 +41,11 @@ if page == "Introduction":
     st.markdown("- Weather Component and Bike Usage")
     st.markdown("- Interactive Map with Aggregated Bike Trips")
     st.markdown("- Recommendations")
-    st.markdown("The 'Aspect Selector' dropdown on the left lets you navigate the different categories our team examined in their analysis.")
+    st.markdown("The 'Aspect Selector' dropdown on the left allows navigation through the different categories examined in the analysis.")
 
     myImage = Image.open("citibike.jpg") #source: https://commons.wikimedia.org/wiki/File:Citi_Bike_logo.jpg
     st.image(myImage)
+    st.markdown ("Source: https://commons.wikimedia.org/wiki/File:Citi_Bike_logo.jpg")
 
 ########### Create the dual axis line chart page ###############
     
@@ -110,12 +111,18 @@ elif page == 'Weather Component and Bike Usage':
 elif page == 'Most Popular Bike Stations':
     
 ####### Create the filter on the side bar ########
-
     with st.sidebar:
-        season_filter = st.multiselect(label= 'Select the Season', options=df['season'].unique(),
-    default=df['season'].unique())
+        st.write("Select or deselect a season to see how it influences bike trips.")
+        with st.expander("Season", expanded=True):
+            season_options = df['season'].unique()
+            season_filter = []
+            for season in season_options:
+                if st.checkbox(season, value=True):
+                    season_filter.append(season)
 
-    df1 = df.query('season == @season_filter')
+# Filter the dataframe based on the selected seasons
+    
+    df1 = df[df['season'].isin(season_filter)]
 
 ####### Define the total rides ###########
    
@@ -157,7 +164,6 @@ elif page == 'Most Popular Bike Stations':
     )
     st.plotly_chart(fig, use_container_width = True)
     st.markdown("The bar chart clearly shows that certain start stations are more popular than others. The top four stations are West 21st Street/6th Avenue, West Street/Chambers Street, Broadway/West 58th Street, and 6th Avenue/West 33rd Street. These findings indicate that Citi Bike stations in Midtown Manhattan and near Central Park experience the highest usage. Further exploration of this trend can be conducted using the interactive map available through the sidebar select box.")
-    st.markdown("Select a season from the filter on the left to see how it influences bike trips.")
 
 ################# AGGREGATED BIKE TRIPS PAGE #################
 
@@ -190,7 +196,8 @@ else:
     st.header("Conclusions and Recommendations")
     bikes = Image.open("recommendationpic.jpg")  #source: https://www.competitionsciences.org/2020/10/29/statistics-education-resources-for-teachers-and-students-from-the-asa/
     st.image(bikes)
-    st.markdown("### Our analysis has shown that Citi Bike should focus on the following objectives moving forward:")
+    st.markdown ("Source: https://www.competitionsciences.org/2020/10/29/statistics-education-resources-for-teachers-and-students-from-the-asa/")
+    st.markdown("### The analysis has shown that Citi Bike should focus on the following objectives moving forward:")
     st.markdown("- Add more stations or increase the size of existing stations in high-demand areas to accomodate bike shortages, such as the Hudson River Greenway, Chelsea, and the Meatpacking District.")
-    st.markdown("- Offer incentives for users who return bikes to less busy stations or ride during off-peak hours.")
+    st.markdown("- Offer incentives, such as a $2 ride credit for users who return bikes to less busy stations or ride during off-peak hours.")
     st.markdown("- Ensure bikes are fully stocked in these areas during the warmer months to meet higher demand, while reducing the supply in winter and late autumn to lower logistics costs.")
