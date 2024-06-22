@@ -74,7 +74,7 @@ elif page == 'Weather Component and Bike Usage':
     xaxis_title='Date',
     yaxis_title='Daily Bike Rides',
     yaxis2_title='Daily Temperature',
-    height=800,
+    height=600,
     xaxis=dict(
         title=dict(
             text='Date',
@@ -102,7 +102,7 @@ elif page == 'Weather Component and Bike Usage':
 )
 
     st.plotly_chart(fig_2, use_container_width=True)
-    st.markdown("A seasonal trend is evident in both bike trips and temperature. Bike trips peak during the warmer months (May to October) and reach their lowest during the colder months (December to February). Similarly, temperatures are highest in summer and lowest in winter.")
+    st.markdown("A seasonal trend is evident in both bike trips and temperature. Bike trips peak during the warmer months (May to October) and reach their lowest during the colder months (November to April). Similarly, temperatures are highest in summer and lowest in winter.")
     st.markdown("There is a clear correlation between temperature fluctuations and the frequency of bike trips. As temperatures drop, so does bike usage. This insight suggests that the shortage issue Citi Bike faces is primarily a concern during the warmer months.")
 
 ########## MOST POPULAR STATIONS PAGE #######################
@@ -164,7 +164,8 @@ elif page == 'Most Popular Bike Stations':
         width = 900, height = 600
     )
     st.plotly_chart(fig, use_container_width = True)
-    st.markdown("The bar chart clearly shows that certain start stations are more popular than others. The top four stations are West 21st Street/6th Avenue, West Street/Chambers Street, Broadway/West 58th Street, and 6th Avenue/West 33rd Street. These findings indicate that Citi Bike stations in Midtown Manhattan and near Central Park experience the highest usage. Further exploration of this trend can be conducted using the interactive map available through the sidebar select box.")
+    st.markdown("The bar chart clearly shows that certain start stations are more popular than others. The top four stations are West 21st Street/6th Avenue, West Street/Chambers Street, Broadway/West 58th Street, and 6th Avenue/West 33rd Street. These findings indicate that Citi Bike stations in Midtown Manhattan and near Central Park experience the highest usage.")
+    st.markdown("In addition, many of the popular stations are located at intersections or near significant landmarks and avenues, such as 'Broadway & West 60 St', 'University Place & East 14 Street', and 'Central Park South & 6 Avenue'. This highlights that stations near major thoroughfares and popular destinations tend to have higher usage.")
 
 ################# BIKE RIDES THROUGHOUT WEEK PAGE #################
 
@@ -222,7 +223,9 @@ elif page == 'Bike Rides Throughout the Week':
     xaxis_nticks=12,
     )
     st.plotly_chart(fig, use_container_width = True)
-    st.markdown("Looking at the heatmap, Wednesdays, Thursdays, and Fridays emerge as the busiest days of the week, with a notable surge in rider activity around 4-6 pm. This insight is crucial for optimizing station management, allowing us to allocate resources efficiently during peak hours to ensure smooth operations and customer satisfaction. ")
+    st.markdown("Looking at the heatmap, Wednesdays, Thursdays, and Fridays emerge as the busiest days of the week, with a notable surge in rider activity around 4-6 pm.")
+    st.markdown("We can also see that there is a noticeable difference in bike usage patterns between weekdays and weekends. Weekdays show higher bike usage during commuting hours, while weekends exhibit a more spread-out usage pattern throughout the day.")
+    st.markdown("These insights are crucial for optimizing station management, allowing us to allocate resources efficiently during peak hours to ensure smooth operations and customer satisfaction.")
 
 ################# AGGREGATED BIKE TRIPS PAGE #################
 
