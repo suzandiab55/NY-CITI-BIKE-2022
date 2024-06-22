@@ -37,9 +37,10 @@ top20 = pd.read_csv('top20.csv')
 if page == "Introduction":
     st.markdown("#### This dashboard is designed to offer valuable insights into the current expansion challenges faced by Citi Bike.")
     st.markdown("Presently, Citi Bike encounters issues where customers frequently report bike shortages at specific times. This analysis aims to explore the underlying causes of these availability problems.")
-    st.markdown("The dashboard is separated into 4 sections:")
-    st.markdown("- Most Popular Bike Stations")
+    st.markdown("The dashboard is separated into 5 sections:")
     st.markdown("- Weather Component and Bike Usage")
+    st.markdown("- Most Popular Bike Stations")
+    st.markdown("- Bike Rides Throughout the Week")
     st.markdown("- Interactive Map with Aggregated Bike Trips")
     st.markdown("- Recommendations")
     st.markdown("The 'Aspect Selector' dropdown on the left allows navigation through the different categories examined in the analysis.")
@@ -165,7 +166,7 @@ elif page == 'Most Popular Bike Stations':
     )
     st.plotly_chart(fig, use_container_width = True)
     st.markdown("The bar chart clearly shows that certain start stations are more popular than others. The top four stations are West 21st Street/6th Avenue, West Street/Chambers Street, Broadway/West 58th Street, and 6th Avenue/West 33rd Street. These findings indicate that Citi Bike stations in Midtown Manhattan and near Central Park experience the highest usage.")
-    st.markdown("In addition, many of the popular stations are located at intersections or near significant landmarks and avenues, such as 'Broadway & West 60 St', 'University Place & East 14 Street', and 'Central Park South & 6 Avenue'. This highlights that stations near major thoroughfares and popular destinations tend to have higher usage.")
+    st.markdown("In addition, many of the popular stations are located at intersections or near significant landmarks and avenues, such as 'Broadway & West 58th Street', 'University Place & East 14th Street', and 'Central Park South & 6th Avenue'. This highlights that stations near major thoroughfares and popular destinations tend to have higher usage.")
 
 ################# BIKE RIDES THROUGHOUT WEEK PAGE #################
 
