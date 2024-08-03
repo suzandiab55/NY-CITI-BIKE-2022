@@ -2,7 +2,9 @@
 ## Objective 
 The NY-CITI-BIKE-2022 project aims to analyze Citi Bike usage in New York City for the year 2022. By leveraging data visualization tools and APIs, the project seeks to uncover trends, user behavior, and usage patterns to enhance urban mobility planning and bike sharing system efficiency.
 ## Data
-The dataset includes detailed records of Citi Bike rides for the year 2022, provided through the Citi Bike API. Key parameters include:
+The dataset includes detailed records of Citi Bike rides for the year 2022, provided through the Citi Bike API. 
+
+Key parameters include:
 
 - Trip durations
 - Start and end stations
