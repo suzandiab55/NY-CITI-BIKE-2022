@@ -18,7 +18,7 @@ For this project, various tools and libraries were utilized:
 - Plotly & Dash for interactive data visualizations and dashboard creation
 - Folium for advanced geospatial plotting
 ## Extra Resources
-The interactive dashboard from this project can be accessed [here](https://suzandiab55-ny-citi-bike-2022-st-dashboard2-fqfy75.streamlit.app/)].
+The interactive dashboard from this project can be accessed [here](https://suzandiab55-ny-citi-bike-2022-st-dashboard2-fqfy75.streamlit.app/).
 
 Interactive Dashboard of Citi Bike Usage
 ## Key Insights
