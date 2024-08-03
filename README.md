@@ -13,6 +13,7 @@ Key parameters include:
 - Geospatial coordinates of bike stations
 
 Access the Citi Bike trip data [here](https://s3.amazonaws.com/tripdata/index.html) underneath the year 2022.
+
 ##Tools
 For this project, various tools and libraries were utilized:
 
